@@ -108,7 +108,18 @@ int C_SCAN(int start_position){
 }
 
 int main( int argc, char *argv[] )  {
+  if (argc < 2){
+    printf("\nPlease provide start_position of disk head:\n./filename.exe <start_position>\n\n");
+    return 0;
+  }
+
   int start_position = atoi(argv[1]);
+
+  if (start_position > 5000 || start_position < 0){
+    printf("\nPlease provide start_position betweeen 0 and 4999, inclusive. \n\n");
+    return 0;
+  }
+
   printf("start position: %d\n", start_position);
   int movement;
   srand(time(NULL));
@@ -117,9 +128,11 @@ int main( int argc, char *argv[] )  {
   printf("Total movement in FIFO: %d\n", movement);
 
   movement = SCAN(start_position);
+  printf("Assuming the head moves towards 0 first.\n");
   printf("Total movement in SCAN: %d\n", movement);
 
   movement = C_SCAN(start_position);
+  printf("Assuming the head moves towards 0 first.\n");
   printf("Total movement in C-SCAN: %d\n", movement);
 
   return 0;
